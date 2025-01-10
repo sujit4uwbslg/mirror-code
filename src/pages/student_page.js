@@ -1,7 +1,7 @@
 // src/components/StudentForm.js
 import React, { useState } from 'react';
-import database from './firebase';
-
+import database from './firebase_m';
+import { ref,push } from 'firebase/database';
 const StudentForm = () => {
   const [student, setStudent] = useState({ name: '', age: '', grade: '' });
 
@@ -15,7 +15,8 @@ const StudentForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    database.ref('students').push(student);
+    const studentRef = ref(database, 'students'); 
+    push(studentRef, student);
     setStudent({ name: '', age: '', grade: '' });
   };
 
