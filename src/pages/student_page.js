@@ -1,6 +1,6 @@
 // src/components/StudentForm.js
 import React, { useState } from 'react';
-import database from './firebase_m';
+import {database} from './firebase_m';
 import { ref,push } from 'firebase/database';
 const StudentForm = () => {
   const [student, setStudent] = useState({ name: '', age: '', grade: '' });
