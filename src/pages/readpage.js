@@ -7,11 +7,25 @@ const FirestoreData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'student'));
-      const docs = querySnapshot.docs.map(doc => doc.data());
-      setData(docs);
+        try{
+            const colRef=collection(db, 'sample');
+            console.log("Collection Reference: ", colRef);
+            const querySnapshot = await getDocs(colRef);
+            if (!querySnapshot.empty) {
+                 const docs = querySnapshot.docs.map(doc => doc.data()); 
+                 console.log("Fetched Docs Data: ", docs); 
+                 setData(docs); 
+                } else { 
+                    console.log("No documents found."); 
+                }
+            
+        }catch(error){
+            console.error("Error fetching data: ", error);
+        }
+        
+     
     };
-
+    
     fetchData();
   }, []);
 
