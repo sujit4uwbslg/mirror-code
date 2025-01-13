@@ -10,8 +10,8 @@ const PlacementDataTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     HTNo: '',
-    name: '',
-    gender: '',
+    'Name of the Student': '',
+    Gender: '',
     dob: '',
     officialEmail: '',
     personalEmail: '',
@@ -42,20 +42,20 @@ const PlacementDataTable = () => {
     setSelectedRecord(record);
     setFormData({
       HTNo: record.HTNo,
-      name: record.name,
-      gender: record.gender,
-      dob: record.dob,
-      officialEmail: record.officialEmail,
-      personalEmail: record.personalEmail,
-      contactNumber: record.contactNumber,
-      aadhar: record.aadhar,
-      pan: record.pan,
-      sscCGPA: record.sscCGPA,
-      sscPerc: record.sscPerc,
-      interPerc: record.interPerc,
-      btechCGPA: record.btechCGPA,
-      btechPerc: record.btechPerc,
-      totalBacklogs: record.totalBacklogs
+      'Name of the Student': record['Name of the Student'],
+      Gender: record.Gender,
+      dob: record.DOB,
+      officialEmail: record['Official Email ID'],
+      personalEmail: record['Personal Email ID'],
+      contactNumber: record['Contact Number'],
+      aadhar: record.Aadhar,
+      pan: record.PAN,
+      sscCGPA: record['SSC CGPA'],
+      sscPerc: record['SSC Perc'],
+      interPerc: record['INTER %'],
+      btechCGPA: record['B.Tech CGPA'],
+      btechPerc: record['B.Tech Percentage'],
+      totalBacklogs: record['Total Backlogs']
     });
     setShowModal(true);
   };
@@ -65,16 +65,41 @@ const PlacementDataTable = () => {
     setData(data.filter(item => item.id !== id));
   };
 
+  /* backup handleSave
   const handleSave = async () => {
     const docRef = doc(db, 'placement-data', selectedRecord.id);
     await updateDoc(docRef, formData);
     setData(data.map(item => (item.id === selectedRecord.id ? { ...item, ...formData } : item)));
     setShowModal(false);
+  };*/
+
+  const handleSave = async () => {
+    try {
+      console.log('Selected Record ID:', selectedRecord.id);
+      console.log('Form Data to be updated:', formData);
+  
+      const docRef = doc(db, 'placement-data', selectedRecord.id);
+      await updateDoc(docRef, formData);
+  
+      console.log('Document successfully updated!');
+  
+      setData(data.map(item => (item.id === selectedRecord.id ? { ...item, ...formData } : item)));
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error updating document:', error);
+    }
   };
+  
+  
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { name, value } = e.target;
+  setFormData((prevState) => ({
+    ...prevState,
+    [name]: value,
+  }));
+};
+
 
   return (
     <div>
@@ -136,15 +161,15 @@ const PlacementDataTable = () => {
             </label>
             <label>
               Name:
-              <input type="text" name="name" value={formData.name} onChange={handleChange} />
+              <input type="text" name="'Name of the Student'" value={formData['Name of the Student']} onChange={handleChange} />
             </label>
             <label>
               Gender:
-              <input type="text" name="gender" value={formData.gender} onChange={handleChange} />
+              <input type="text" name="gender" value={formData.Gender} onChange={handleChange} />
             </label>
             <label>
               DOB:
-              <input type="date" name="dob" value={formData.dob} onChange={handleChange} />
+              <input type="text" name="dob" value={formData.dob} onChange={handleChange} />
             </label>
             <label>
               Official Email ID:

@@ -41,6 +41,7 @@ const BulkUpload = () => {
 
             // Add document if it doesn't exist
             if (!exists) {
+              //record.DOB=new Date(record.DOB).toISOString();
               await addDoc(collection(db, 'placement-data'), record);
               console.log('Document successfully written!', record);
             } else {
