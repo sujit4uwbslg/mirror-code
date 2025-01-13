@@ -106,16 +106,16 @@ const PlacementDataTable = () => {
               <td>{record['Name of the Student']}</td>
               <td>{record.Gender}</td>
               <td>{record.DOB}</td>
-              <td>{record.officialEmail}</td>
-              <td>{record.personalEmail}</td>
+              <td>{record['Official Email ID']}</td>
+              <td>{record['Personal Email ID']}</td>
               <td>{record['Contact Number']}</td>
               <td>{record.Aadhar}</td>
               <td>{record.PAN}</td>
               <td>{record['SSC CGPA']}</td>
-              <td>{record.sscPerc}</td>
-              <td>{record.interPerc}</td>
-              <td>{record.CGPA}</td>
-              <td>{record.btechPerc}</td>
+              <td>{record['SSC Perc']}</td>
+              <td>{record['INTER %']}</td>
+              <td>{record['B.Tech CGPA']}</td>
+              <td>{record['B.Tech Percentage']}</td>
               <td>{record['Total Backlogs']}</td>
               <td>
                 <button onClick={() => handleEdit(record)}>Edit</button>
